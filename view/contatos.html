@@ -1,0 +1,44 @@
+<div class="jumbotron">
+    <ui-accordions>
+        <ui-accordion title="Accordion">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, quasi.
+        </ui-accordion>
+        <ui-accordion title="Accordion">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, quasi.
+        </ui-accordion>
+        <ui-accordion title="Accordion">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, quasi.
+        </ui-accordion>
+    </ui-accordions>
+
+    <h1>Lista Telefonica</h1>
+    <input type="text" ng-model="criterioBusca" ng-model-options="{updateOn: 'default blur', debounce: {default: 500, blur: 0}}" placeholder="A quem está buscando?">
+
+    <table class="table table striped">
+        <thead>
+            <tr>
+                <th></th>
+                <th><a href="" ng-click="ordenar('nome')">Nome</a></th>
+                <th><a href="" ng-click="ordenar('telefone')">Telefone</a></th>
+                <th>Operadora</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr
+                ng-class="{selecionado: contato.selecionado}"
+                ng-repeat="contato in contatos | filter:criterioBusca | orderBy:ordenacao:direcao"
+            >
+                <td><input type="checkbox" ng-model="contato.selecionado"></td>
+                <td><a href="#!/detalhes-contato/{{contato.id}}">{{contato.nome | name | ellipsis:15}}</a></td>
+                <td>{{::contato.telefone}}</td>
+                <td>{{::contato.operadora.nome}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+    
+    <button><a href="#!/novo-contato">Novo contato</a></button>
+    <button ng-click="deleteContatos(contatos.id)">Apagar Contatos</button>
+</div>
